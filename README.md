@@ -6,3 +6,5 @@ ART 356 Repo for stuff and things and such... and the like such as
 ![silly cat](https://lh3.googleusercontent.com/F12CfU7uUeXERuIsCm3v78xZ7hlWxscJArPO7rrVCrksu-ieLmVfTByqGvekYyGz1hczikrnJ55QazJ9viM7O20_BA=s1280-w1280-h800)
 
 ### Journal Entry
+
+Current Journal Entry [test](Journal/8.20.26.md)
