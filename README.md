@@ -7,4 +7,4 @@ ART 356 Repo for stuff and things and such... and the like such as
 
 ### Journal Entry
 
-Current Journal Entry [Journal 4](Journal/10.12.26.md)
+Current Journal Entry [Journal 3](Journal/10.12.26.md)
