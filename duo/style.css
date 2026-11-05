@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+:root {
+  color-scheme: dark;
+  font-family: "DM Sans", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #10120f;
+  color: #f3f1e9;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgb(14 18 13 / 35%), rgb(10 12 10 / 78%)),
+    linear-gradient(120deg, rgb(15 20 15 / 58%), rgb(14 15 13 / 66%)),
+    url("bg.avif") center / cover fixed no-repeat,
+    #10120f;
+}
+
+.page {
+  display: grid;
+  min-height: 100vh;
+  padding: 32px 20px;
+  place-items: center;
+}
+
+.project-card {
+  width: min(100%, 560px);
+  padding: clamp(32px, 7vw, 64px);
+  border: 1px solid rgb(241 240 228 / 16%);
+  border-radius: 24px;
+  background: rgb(20 23 19 / 72%);
+  box-shadow: 0 24px 80px rgb(0 0 0 / 35%);
+  backdrop-filter: blur(18px);
+}
+
+.eyebrow,
+.card-footer {
+  color: #b7c0a9;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  margin: 0 0 18px;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(3.5rem, 11vw, 5.5rem);
+  font-weight: 600;
+  letter-spacing: -0.08em;
+  line-height: 0.95;
+}
+
+h1 span {
+  color: #c4de86;
+}
+
+.intro {
+  margin: 20px 0 36px;
+  color: #d3d4ca;
+  font-size: 1.05rem;
+}
+
+.project-links {
+  display: grid;
+  gap: 12px;
+}
+
+.project-link {
+  display: flex;
+  min-height: 72px;
+  align-items: center;
+  gap: 18px;
+  padding: 0 20px;
+  border: 1px solid rgb(241 240 228 / 13%);
+  border-radius: 14px;
+  background: rgb(255 255 255 / 4%);
+  color: inherit;
+  text-decoration: none;
+  transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.project-link:hover {
+  transform: translateY(-2px);
+  border-color: rgb(196 222 134 / 65%);
+  background: rgb(196 222 134 / 9%);
+}
+
+.project-link:focus-visible {
+  outline: 2px solid #c4de86;
+  outline-offset: 4px;
+}
+
+.link-number {
+  color: #a7b48e;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.link-name {
+  flex: 1;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.link-arrow {
+  color: #c4de86;
+  font-size: 1.2rem;
+  transition: transform 160ms ease;
+}
+
+.project-link:hover .link-arrow {
+  transform: translate(2px, -2px);
+}
+
+.card-footer {
+  margin: 28px 0 0;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
