@@ -1,4 +1,4 @@
-const contentSection = document.getElementById("overlay");
+const scene = document.getElementById("scene");
 const targetElement = document.documentElement;
 targetElement.style.cursor = "url('img/cursor.cur'), auto";
 
@@ -19,6 +19,22 @@ let data;
 let activeIntro = 1;
 let browserShown = false;
 let lastClickAt = -Infinity;
+
+function resizeScene() {
+  if (!backgroundVideo.videoWidth || !backgroundVideo.videoHeight) {
+    return;
+  }
+
+  const scale = Math.max(
+    window.innerWidth / backgroundVideo.videoWidth,
+    window.innerHeight / backgroundVideo.videoHeight,
+  );
+  scene.style.width = `${backgroundVideo.videoWidth * scale}px`;
+  scene.style.height = `${backgroundVideo.videoHeight * scale}px`;
+}
+
+backgroundVideo.addEventListener("loadedmetadata", resizeScene);
+window.addEventListener("resize", resizeScene);
 
 backgroundVideo.addEventListener("ended", () => {
   backgroundVideo.pause();
@@ -43,7 +59,7 @@ function mouseClicked(event) {
   activeIntro = activeIntro === 1 ? 2 : 1;
   if (activeIntro === 1) {
     browserShown = false;
-    contentSection.querySelector(".gun-browser")?.remove();
+    scene.querySelector(".gun-browser")?.remove();
   }
 
   backgroundVideo.src = `vid/Intro${activeIntro}.mp4`;
@@ -104,12 +120,14 @@ function renderGunBrowser() {
   browserShown = true;
 
   const items = getItems();
-  const maxima = Object.fromEntries(
+  const scales = Object.fromEntries(
     statDefinitions.map((stat) => {
       const finiteValues = items
         .map((item) => numericValue(item[stat.label]))
         .filter((value) => value !== null && Number.isFinite(value));
-      return [stat.label, Math.max(0, ...finiteValues)];
+      finiteValues.sort((a, b) => a - b);
+      const typicalMaximum = finiteValues[Math.floor((finiteValues.length - 1) * 0.9)] ?? 0;
+      return [stat.label, typicalMaximum];
     }),
   );
 
@@ -120,7 +138,7 @@ function renderGunBrowser() {
   sidebar.setAttribute("aria-label", "Weapon list");
   const sidebarHeader = makeElement("header", "sidebar-header");
   sidebarHeader.append(
-    makeElement("p", "eyebrow", "THE GUNGEON"),
+    makeElement("p", "eyebrow", "THE GUNGEON'S AMMONOMICON"),
     makeElement("h1", "sidebar-title", "Arsenal"),
     makeElement("p", "item-count", `${items.length} weapons`),
   );
@@ -131,7 +149,8 @@ function renderGunBrowser() {
   const detail = makeElement("section", "gun-detail book-page");
   detail.setAttribute("aria-live", "polite");
   app.append(sidebar, detail);
-  contentSection.append(app);
+  scene.append(app);
+  requestAnimationFrame(() => app.classList.add("is-visible"));
 
   function showItem(item, selectedButton) {
     for (const button of itemList.querySelectorAll(".gun-list-item")) {
@@ -187,9 +206,9 @@ function renderGunBrowser() {
       const percentage =
         value === Infinity
           ? 100
-          : value === null || maxima[stat.label] === 0
+          : value === null || scales[stat.label] === 0
             ? 0
-            : Math.min(100, Math.max(0, (value / maxima[stat.label]) * 100));
+            : Math.min(100, Math.max(0, (value / scales[stat.label]) * 100));
       fill.style.width = `${percentage}%`;
       track.append(fill);
       row.append(label, track);
@@ -216,4 +235,7 @@ function renderGunBrowser() {
   } else {
     detail.append(makeElement("p", "empty-message", "No weapons were found in gungeonData.csv."));
   }
+}
+function draw() {
+  console.log(mouseX, mouseY);
 }

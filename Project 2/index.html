@@ -6,6 +6,9 @@
 
     <title>Sketch</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <script src="libraries/p5.min.js"></script>
@@ -15,10 +18,12 @@
 
   <body>
    <div id="overlay">
-    <video id="bg-video" autoplay muted playsinline>
-      <source src="vid/Intro1.mp4" type="video/mp4">
-      If you're reading this there's been an error
-    </video>
+    <div id="scene">
+      <video id="bg-video" autoplay muted playsinline>
+        <source src="vid/Intro1.mp4" type="video/mp4">
+        If you're reading this there's been an error
+      </video>
+    </div>
   </div>
     <script src="sketch.js"></script>
   </body>
